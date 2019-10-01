@@ -44,6 +44,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "jest/no-disabled-tests": "warn",
     "jest/prefer-expect-assertions": "off",
+    "jest/expect-expect": "off",
     "jsdoc/no-undefined-types": "off",
     "no-console": "warn",
     "no-unused-vars": "off",
