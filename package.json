@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/0b10/sir-helpalot/issues"
   },
-  "homepage": "https://github.com/0b10/sir-helpalot#readme"
+  "homepage": "https://github.com/0b10/sir-helpalot#readme",
+  "dependencies": {
+    "typescript": "^3.6.3"
+  }
 }
