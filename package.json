@@ -1,6 +1,6 @@
 {
   "name": "sir-helpalot",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A collection of Javascript helpers",
   "keywords": [
     "helpers",
@@ -17,12 +17,13 @@
   "license": "MIT",
   "author": "0b10 <0b10@pm.me>",
   "files": [
-    "**/*"
+    "dist/*"
   ],
   "scripts": {
     "build": "tsc",
     "build:clean": "rm -rfv dist/*",
-    "build:publish": "yarn run lint && yarn run test && yarn run build:clean && yarn run build && cp README.md package.json dist/ && yarn publish dist/",
+    "build:publish": "yarn run lint && yarn run test && yarn run build:clean && yarn run build && yarn run build:types && cp README.md package.json dist/ && yarn publish",
+    "build:types": "tsc -p tsconfig-for-declarations.json",
     "lint": "eslint '**/*.{js,json,ts}'",
     "lint:compile": "tsc --noEmit && eslint '**/*.{js,json,ts}'",
     "lint:fix": "eslint --fix '**/*.{js,json,ts}'",
