@@ -2,25 +2,36 @@
   "name": "sir-helpalot",
   "version": "1.0.0",
   "description": "A collection of Javascript helpers",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "jest"
+  "keywords": [
+    "helpers",
+    "javascript"
+  ],
+  "homepage": "https://github.com/0b10/sir-helpalot#readme",
+  "bugs": {
+    "url": "https://github.com/0b10/sir-helpalot/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0b10/sir-helpalot.git"
   },
-  "keywords": [
-    "helpers",
-    "javascript"
-  ],
-  "author": "0b10 <0b10@pm.me>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/0b10/sir-helpalot/issues"
+  "author": "0b10 <0b10@pm.me>",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
   },
-  "homepage": "https://github.com/0b10/sir-helpalot#readme",
   "dependencies": {
     "typescript": "^3.6.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "eslint": "^6.4.0",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-jsdoc": "^15.9.2",
+    "eslint-plugin-json-format": "^2.0.1",
+    "eslint-plugin-optimize-regex": "^1.1.7",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-security": "^1.4.0"
   }
 }
