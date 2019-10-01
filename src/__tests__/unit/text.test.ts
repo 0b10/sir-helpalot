@@ -35,7 +35,7 @@ describe("unit tests: text", () => {
         fc.property(fc.integer(2, 300), (length) => {
           fc.pre(length % 2 === 0); // to keep the entire result square (easier to test)
           const result = pad({ length, text: "# " });
-          const matches = result.match(/# /g); // all matches, should = length
+          const matches = result.match(/# /g); // all matches, should = half length
           if (matches && matches.length > 0) {
             return matches.length * 2 === length; // * 2: number of matches @ length 2, should equal half length
           }
