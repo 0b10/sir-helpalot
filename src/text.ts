@@ -1,4 +1,4 @@
-import { SirHelpsalotError } from "./error";
+import { SirHelpalotError } from "./error";
 
 /**
  * Get padding text, of a repeating pattern and a given length.
@@ -10,7 +10,7 @@ import { SirHelpsalotError } from "./error";
  * "text" must be a non-empty string - ASCII, UTF-8, and UTF-16 compatible.
  *
  * @returns {string} the padding value
- * @throws SirHelpsalotError - When text isn't a valid string, or length isn't a valid integer.
+ * @throws SirHelpalotError - When text isn't a valid string, or length isn't a valid integer.
  * @example
  * pad({ length: 4, text: "ab" }); // => "abab"
  * pad({ length: 4, text: "a " }); // => "a a "
@@ -20,18 +20,18 @@ import { SirHelpsalotError } from "./error";
 export const pad = ({ length = 1, text = "#" } = {}) => {
   // preconditions
   if (typeof text !== "string") {
-    throw new SirHelpsalotError(`"text" must be a string`);
+    throw new SirHelpalotError(`"text" must be a string`);
   }
   if (typeof length !== "number") {
-    throw new SirHelpsalotError(`"length" must be a positive integer`);
+    throw new SirHelpalotError(`"length" must be a positive integer`);
   }
   if (length < 1 || length > 25000000 || length !== parseInt(`${length}`, 10)) {
     // 25000000 @ 8bits is 25MB, and 50MB for UTF-16
-    throw new SirHelpsalotError(`"length" must an integer 1 < length < 25000000`);
+    throw new SirHelpalotError(`"length" must an integer 1 < length < 25000000`);
   }
   if (!text) {
     // cover empty string case
-    throw new SirHelpsalotError(`"text" cannot be empty`);
+    throw new SirHelpalotError(`"text" cannot be empty`);
   }
 
   if (length < text.length) {

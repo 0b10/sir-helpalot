@@ -1,7 +1,7 @@
 import fc from "fast-check";
 
-import { pad } from "../../";
-import { SirHelpsalotError } from "./../../error";
+import { pad } from "../../text";
+import { SirHelpalotError } from "./../../error";
 
 const maxLength = 25000000;
 const minLength = 1;
@@ -86,7 +86,7 @@ describe("unit tests: text", () => {
               try {
                 pad({ length, text });
               } catch (e) {
-                return e instanceof SirHelpsalotError;
+                return e instanceof SirHelpalotError;
               }
               return false;
             }),
@@ -100,7 +100,7 @@ describe("unit tests: text", () => {
         // ! limit these to just a few, in case they fail, 50 tests at max size could be slow. don't fuzz.
         describe(`given the invalid (max) length input: '${length}'`, () => {
           it("should throw an error", () => {
-            expect(() => pad({ length, text: "#" })).toThrow(SirHelpsalotError);
+            expect(() => pad({ length, text: "#" })).toThrow(SirHelpalotError);
           });
         });
       });
@@ -113,7 +113,7 @@ describe("unit tests: text", () => {
               try {
                 pad({ length, text: "#" });
               } catch (e) {
-                return e instanceof SirHelpsalotError;
+                return e instanceof SirHelpalotError;
               }
               return false;
             }),
@@ -132,7 +132,7 @@ describe("unit tests: text", () => {
               try {
                 pad({ length, text });
               } catch (e) {
-                return e instanceof SirHelpsalotError;
+                return e instanceof SirHelpalotError;
               }
               return false;
             }),
@@ -151,7 +151,7 @@ describe("unit tests: text", () => {
               try {
                 pad({ length, text });
               } catch (e) {
-                return e instanceof SirHelpsalotError;
+                return e instanceof SirHelpalotError;
               }
               return false;
             }),
@@ -169,7 +169,7 @@ describe("unit tests: text", () => {
               try {
                 pad({ length, text: "#" });
               } catch (e) {
-                return e instanceof SirHelpsalotError;
+                return e instanceof SirHelpalotError;
               }
               return false;
             }),

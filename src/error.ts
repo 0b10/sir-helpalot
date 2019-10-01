@@ -1,6 +1,6 @@
-export class SirHelpsalotError extends Error {
+export class SirHelpalotError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = "SirHelpsalotError";
+    this.name = "SirHelpalotError";
   }
 }
