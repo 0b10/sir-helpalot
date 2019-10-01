@@ -18,6 +18,11 @@
   "author": "0b10 <0b10@pm.me>",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "build:clean": "rm -rfv dist/*",
+    "lint": "eslint '**/*.{js,json,ts}'",
+    "lint:compile": "tsc --noEmit && eslint '**/*.{js,json,ts}'",
+    "lint:fix": "eslint --fix '**/*.{js,json,ts}'",
     "test": "jest"
   },
   "dependencies": {
