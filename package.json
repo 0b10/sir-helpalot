@@ -25,11 +25,9 @@
     "lint:fix": "eslint --fix '**/*.{js,json,ts}'",
     "test": "jest"
   },
-  "dependencies": {
-    "@babel/core": "^7.6.2",
-    "typescript": "^3.6.3"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
@@ -42,7 +40,8 @@
     "eslint-plugin-optimize-regex": "^1.1.7",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-security": "^1.4.0",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "typescript": "^3.6.3"
   },
   "env": {
     "jest": true
