@@ -1,0 +1,23 @@
+{
+  "name": "sir-helpalot",
+  "version": "1.0.0",
+  "description": "A collection of Javascript helpers",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0b10/sir-helpalot.git"
+  },
+  "keywords": [
+    "helpers",
+    "javascript"
+  ],
+  "author": "0b10 <0b10@pm.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0b10/sir-helpalot/issues"
+  },
+  "homepage": "https://github.com/0b10/sir-helpalot#readme"
+}
