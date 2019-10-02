@@ -9,14 +9,15 @@ const RE_SURROGATE_PAIRS = /[\uD800-\uDBFF][\uDC00-\uDFFF]/;
  *
  * "length" must be an integer: 0 < n < 25,000,000 (25MB as UTF-8)
  *
- * "text" must be a non-empty string - ASCII, UTF-8, and UTF-16 compatible - surrogate pairs are
+ * "prefix" must be a non-empty string - ASCII, UTF-8, and UTF-16 compatible - surrogate pairs are
  *  rejected due to string length guarantees 😀
  *
  * "text" must be a non-empty string - ASCII, UTF-8, and UTF-16 compatible - surrogate pairs are
  *  rejected due to string length guarantees
  *
  * @returns {string} the padding value
- * @throws SirHelpalotError - When text isn't a valid string, or length isn't a valid integer.
+ * @throws SirHelpalotError - When text, or prefix isn't a valid string, or length isn't a valid
+ *  integer.
  * @example
  * pad({ length: 4, text: "ab" }); // => "abab"
  * pad({ length: 4, text: "a " }); // => "a a "
