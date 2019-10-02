@@ -6,6 +6,8 @@ import { SirHelpalotError } from "./../../error";
 const maxLength = 25000000;
 const minLength = 1;
 
+const hasSurrogatePair = (str: string) => /[\uD800-\uDBFF][\uDC00-\uDFFF]/.test(str);
+
 describe("unit tests: text", () => {
   // >>> OK >>>
   // +++ smoke +++
@@ -24,6 +26,40 @@ describe("unit tests: text", () => {
       fc.assert(
         fc.property(fc.integer(1, 300), (length) => {
           return pad({ length, text: "#" }).length === length;
+        }),
+        { verbose: true }
+      );
+    });
+
+    // +++ with prefix +++
+    it("should return an expected length of string when given a prefix", () => {
+      fc.assert(
+        fc.property(fc.integer(6, 300), (length) => {
+          // prefix is length 6, functions throws when length is smaller than prefix
+          return pad({ length, text: "#", prefix: "prefix" }).length === length;
+        }),
+        { verbose: true }
+      );
+    });
+
+    // +++ prefix fuzz +++
+    it("should return an expected length of string, when given varying lengths and prefix lengths", () => {
+      fc.assert(
+        fc.property(fc.integer(50, 100), fc.asciiString(1, 49), (length, prefix) => {
+          // ! prefix must be shorter than total length
+          return pad({ length, text: "#", prefix }).length === length;
+        }),
+        { verbose: true }
+      );
+    });
+
+    // +++ prefix unicode +++
+    it("should return an expected length of string, when prefix is unicode", () => {
+      fc.assert(
+        fc.property(fc.integer(5, 10), fc.fullUnicodeString(1, 5), (length, prefix) => {
+          // ! prefix must be shorter than total length
+          fc.pre(!hasSurrogatePair(prefix)); // ! surrogate pairs interfere with string length
+          return pad({ length, text: "#", prefix }).length === length;
         }),
         { verbose: true }
       );
@@ -59,7 +95,9 @@ describe("unit tests: text", () => {
     // +++ unicode, fuzz +++
     it("should work for unicode too", () => {
       fc.assert(
-        fc.property(fc.integer(1, 300), fc.fullUnicodeString(0, 200), (length, text) => {
+        // ! keep the unicode string length low, otherwise too many surrogate pairs are generated
+        fc.property(fc.integer(1, 10), fc.fullUnicodeString(0, 5), (length, text) => {
+          fc.pre(!hasSurrogatePair(text)); // ! surrogate pairs interfere with string length
           fc.pre(text !== ""); // intentionally throws
           return pad({ length, text }).length === length;
         }),
@@ -82,6 +120,7 @@ describe("unit tests: text", () => {
       [""].forEach((text) => {
         describe(`given the text input: '${text}'`, () => {
           it("should throw an error", () => {
+            // FIXME: do assert
             fc.property(fc.integer(1, 300), (length) => {
               try {
                 pad({ length, text });
@@ -93,6 +132,56 @@ describe("unit tests: text", () => {
               { verbose: true };
           });
         });
+      });
+
+      // +++ prefix too large +++
+      describe(`when the length is shorter than the prefix`, () => {
+        it("should throw an error", () => {
+          fc.assert(
+            fc.property(fc.integer(1, 9), fc.asciiString(10, 20), (length, prefix) => {
+              try {
+                pad({ length, text: "#", prefix });
+              } catch (e) {
+                return e instanceof SirHelpalotError;
+              }
+              return false;
+            }),
+            { verbose: true }
+          );
+        });
+      });
+
+      // +++ unicode, fuzz +++
+      it("should reject surrogate pairs for text", () => {
+        fc.assert(
+          // ! keep the unicode string length high, to increse surrogate pair generation
+          fc.property(fc.integer(1, 10), fc.fullUnicodeString(1, 50), (length, text) => {
+            fc.pre(hasSurrogatePair(text));
+            try {
+              pad({ length, text });
+            } catch (e) {
+              return e instanceof SirHelpalotError;
+            }
+            return false;
+          }),
+          { verbose: true }
+        );
+      });
+
+      it("should reject surrogate pairs for prefix", () => {
+        fc.assert(
+          // ! keep the unicode string length high, to increse surrogate pair generation
+          fc.property(fc.integer(1, 10), fc.fullUnicodeString(1, 50), (length, prefix) => {
+            fc.pre(hasSurrogatePair(prefix));
+            try {
+              pad({ length, text: "#", prefix });
+            } catch (e) {
+              return e instanceof SirHelpalotError;
+            }
+            return false;
+          }),
+          { verbose: true }
+        );
       });
 
       // +++ specific lengths +++
