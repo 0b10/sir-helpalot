@@ -2,12 +2,12 @@
 import fc from "fast-check";
 
 import { FAST_CHECK_OPTIONS } from "../../config";
-import { isSafeStrictInteger, isNotSafeStrictInteger } from "../../../predicates";
+import { isSafeStrictInt, isNotSafeStrictInt } from "../../../predicates";
 
-describe("isSafeStrictInteger()", () => {
+describe("isSafeStrictInt()", () => {
   it("should exist", () => {
-    expect(isSafeStrictInteger).toBeDefined();
-    expect(isNotSafeStrictInteger).toBeDefined();
+    expect(isSafeStrictInt).toBeDefined();
+    expect(isNotSafeStrictInt).toBeDefined();
   });
 
   // >>> POSITIVE >>>
@@ -16,8 +16,7 @@ describe("isSafeStrictInteger()", () => {
       fc.assert(
         fc.property(fc.maxSafeInteger(), (value) => {
           return (
-            isSafeStrictInteger(value) === true &&
-            isNotSafeStrictInteger(value) === !isSafeStrictInteger(value)
+            isSafeStrictInt(value) === true && isNotSafeStrictInt(value) === !isSafeStrictInt(value)
           );
         })
       ),
@@ -27,14 +26,14 @@ describe("isSafeStrictInteger()", () => {
     it("should return true for values just of the inside upper boundary", () => {
       const max = Number.MAX_SAFE_INTEGER;
       for (let val of [max, max - 1, max - 2]) {
-        expect(isSafeStrictInteger(val) && !isNotSafeStrictInteger(val)).toBe(true);
+        expect(isSafeStrictInt(val) && !isNotSafeStrictInt(val)).toBe(true);
       }
     });
 
     it("should return true for values just inside of the lower boundary", () => {
       const min = Number.MIN_SAFE_INTEGER;
       for (let val of [min, min + 1, min + 2]) {
-        expect(isSafeStrictInteger(val) && !isNotSafeStrictInteger(val)).toBe(true);
+        expect(isSafeStrictInt(val) && !isNotSafeStrictInt(val)).toBe(true);
       }
     });
   });
@@ -48,8 +47,8 @@ describe("isSafeStrictInteger()", () => {
           (value) => {
             fc.pre(value > Number.MAX_SAFE_INTEGER); // unsafe, so quirky - sits on boundary sometimes
             return (
-              isSafeStrictInteger(value) === false &&
-              isNotSafeStrictInteger(value) === !isSafeStrictInteger(value)
+              isSafeStrictInt(value) === false &&
+              isNotSafeStrictInt(value) === !isSafeStrictInt(value)
             );
           }
         )
@@ -64,8 +63,8 @@ describe("isSafeStrictInteger()", () => {
           (value) => {
             fc.pre(value < Number.MIN_SAFE_INTEGER); // unsafe, so quirky - sits on boundary sometimes
             return (
-              isSafeStrictInteger(value) === false &&
-              isNotSafeStrictInteger(value) === !isSafeStrictInteger(value)
+              isSafeStrictInt(value) === false &&
+              isNotSafeStrictInt(value) === !isSafeStrictInt(value)
             );
           }
         )
@@ -77,14 +76,14 @@ describe("isSafeStrictInteger()", () => {
     it("should return false for values just outside of the upper boundary", () => {
       const max = Number.MAX_SAFE_INTEGER;
       for (let val of [max + 1, max + 2, max + 3]) {
-        expect(isSafeStrictInteger(val) && !isNotSafeStrictInteger(val)).toBe(false);
+        expect(isSafeStrictInt(val) && !isNotSafeStrictInt(val)).toBe(false);
       }
     });
 
     it("should return false for values just outside of the lower boundary", () => {
       const min = Number.MIN_SAFE_INTEGER;
       for (let val of [min - 1, min - 2, min - 3]) {
-        expect(isSafeStrictInteger(val) && !isNotSafeStrictInteger(val)).toBe(false);
+        expect(isSafeStrictInt(val) && !isNotSafeStrictInt(val)).toBe(false);
       }
     });
   });
@@ -96,8 +95,8 @@ describe("isSafeStrictInteger()", () => {
         fc.property(fc.anything(), (value) => {
           fc.pre(!/^-?\d+/.test(value)); // not a digit
           return (
-            isSafeStrictInteger(value) === false &&
-            isNotSafeStrictInteger(value) === !isSafeStrictInteger(value)
+            isSafeStrictInt(value) === false &&
+            isNotSafeStrictInt(value) === !isSafeStrictInt(value)
           );
         })
       ),

@@ -2,21 +2,19 @@
 import fc from "fast-check";
 
 import { FAST_CHECK_OPTIONS } from "../../config";
-import { isStrictInteger, isNotStrictInteger } from "../../../predicates";
+import { isStrictInt, isNotStrictInt } from "../../../predicates";
 
-describe("isStrictInteger()", () => {
+describe("isStrictInt()", () => {
   it("should exist", () => {
-    expect(isStrictInteger).toBeDefined();
-    expect(isNotStrictInteger).toBeDefined();
+    expect(isStrictInt).toBeDefined();
+    expect(isNotStrictInt).toBeDefined();
   });
 
   describe("positive", () => {
     it("should return true for random integer values", () => {
       fc.assert(
         fc.property(fc.integer(), (value) => {
-          return (
-            isStrictInteger(value) === true && isNotStrictInteger(value) === !isStrictInteger(value)
-          );
+          return isStrictInt(value) === true && isNotStrictInt(value) === !isStrictInt(value);
         })
       ),
         FAST_CHECK_OPTIONS;
@@ -28,10 +26,7 @@ describe("isStrictInteger()", () => {
       fc.assert(
         fc.property(fc.anything(), (value) => {
           fc.pre(!/^-?\d+/.test(value)); // not a digit
-          return (
-            isStrictInteger(value) === false &&
-            isNotStrictInteger(value) === !isStrictInteger(value)
-          );
+          return isStrictInt(value) === false && isNotStrictInt(value) === !isStrictInt(value);
         })
       ),
         FAST_CHECK_OPTIONS;

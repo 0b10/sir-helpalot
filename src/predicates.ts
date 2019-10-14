@@ -13,7 +13,7 @@ export const isNotProductionEnv = () => !isProductionEnv();
  * @param {any} value = anything
  * @returns {bool} true if it is an integer, false otherwise
  */
-export const isStrictInteger = (value: any) => RE_STRICT_INT.test(value);
+export const isStrictInt = (value: any) => RE_STRICT_INT.test(value);
 
 /**
  * Determine if a value is not a signed integer. There are no lower or upper bound constraints.
@@ -23,7 +23,7 @@ export const isStrictInteger = (value: any) => RE_STRICT_INT.test(value);
  * @param {any} value = anything
  * @returns {bool} true if it is not an integer, false otherwise
  */
-export const isNotStrictInteger = (value: any) => !isStrictInteger(value);
+export const isNotStrictInt = (value: any) => !isStrictInt(value);
 
 /**
  * Determine if a value is an integer between MIN_SAFE_INTEGER < n < MAX_SAFE_INTEGER.
@@ -36,8 +36,8 @@ export const isNotStrictInteger = (value: any) => !isStrictInteger(value);
  * @param {any} value = anything
  * @returns {bool} true if it is a strict integer within the specified boundaries, false otherwise
  */
-export const isSafeStrictInteger = (value: any) =>
-  isStrictInteger(value) && value >= Number.MIN_SAFE_INTEGER && value <= Number.MAX_SAFE_INTEGER;
+export const isSafeStrictInt = (value: any) =>
+  isStrictInt(value) && value >= Number.MIN_SAFE_INTEGER && value <= Number.MAX_SAFE_INTEGER;
 
 /**
  * Determine if a value is not an integer between MIN_SAFE_INTEGER < n < MAX_SAFE_INTEGER.
@@ -50,4 +50,4 @@ export const isSafeStrictInteger = (value: any) =>
  * @param {any} value = anything
  * @returns {bool} true if it is not a strict integer within the specified boundaries, false otherwise
  */
-export const isNotSafeStrictInteger = (value: any) => !isSafeStrictInteger(value);
+export const isNotSafeStrictInt = (value: any) => !isSafeStrictInt(value);
