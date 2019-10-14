@@ -11,7 +11,15 @@ export const isNotProductionEnv = () => !isProductionEnv();
  * "Strict" contrasts Number.isInteger(1.0) === true, which is bad.
  *
  * @param {any} value = anything
- * @returns {bool} true if it is a whole, real number
+ * @returns {bool} true if it is an integer, false otherwise
  */
 export const isStrictInteger = (value: any) => RE_STRICT_INT.test(value);
+/**
+ * Determine if a value is not a signed integer. There are no lower or upper bound constraints.
+ *
+ * "Strict" contrasts Number.isInteger(1.0) === true, which is bad.
+ *
+ * @param {any} value = anything
+ * @returns {bool} true if it is not an integer, false otherwise
+ */
 export const isNotStrictInteger = (value: any) => !isStrictInteger(value);
