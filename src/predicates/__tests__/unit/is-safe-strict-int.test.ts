@@ -1,7 +1,7 @@
 import fc from "fast-check";
 
-import { FAST_CHECK_OPTIONS } from "../../config";
-import { isSafeStrictInt, isNotSafeStrictInt } from "../../../predicates";
+import { FAST_CHECK_OPTIONS } from "../../../__tests__/config";
+import { isSafeStrictInt, isNotSafeStrictInt } from "../../predicates";
 
 describe("isSafeStrictInt()", () => {
   it("should exist", () => {

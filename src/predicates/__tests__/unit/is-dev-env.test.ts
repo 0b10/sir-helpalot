@@ -1,18 +1,18 @@
 /* eslint-disable jest/no-hooks */
 import fc from "fast-check";
 
-import { FAST_CHECK_OPTIONS } from "../../config";
-import { isNotProductionEnv, isProductionEnv } from "../../../predicates";
-import { PRODUCTION_NODE_ENVS } from "../../../constants";
+import { DEV_NODE_ENVS } from "../../constants";
+import { FAST_CHECK_OPTIONS } from "../../../__tests__/config";
+import { isDevEnv, isNotDevEnv } from "../../predicates";
 
-describe("isProductionEnv()", () => {
+describe("isDevEnv()", () => {
   it("should exist", () => {
-    expect(isProductionEnv).toBeDefined();
+    expect(isDevEnv).toBeDefined();
   });
 
   // >>> POSITIVE >>>
-  PRODUCTION_NODE_ENVS.forEach((TEMP_NODE_ENV) => {
-    describe(`for a "production" NODE_ENV value`, () => {
+  DEV_NODE_ENVS.forEach((TEMP_NODE_ENV) => {
+    describe(`for a "development" NODE_ENV value`, () => {
       const ORIGINAL_NODE_ENV = process.env.NODE_ENV;
 
       beforeEach(() => {
@@ -24,14 +24,14 @@ describe("isProductionEnv()", () => {
       });
 
       it(`should return true for NODE_ENV=${TEMP_NODE_ENV}`, () => {
-        expect(isProductionEnv()).toBe(true);
-        expect(isNotProductionEnv()).toBe(!isProductionEnv());
+        expect(isDevEnv()).toBe(true);
+        expect(isNotDevEnv()).toBe(!isDevEnv());
       });
     });
   });
 
   // >>> NEGATIVE >>>
-  describe(`for any non-production NODE_ENV value`, () => {
+  describe(`for any non-development NODE_ENV value`, () => {
     const ORIGINAL_NODE_ENV = process.env.NODE_ENV;
 
     afterAll(() => {
@@ -41,9 +41,8 @@ describe("isProductionEnv()", () => {
     it(`should return false for any random ascii string`, () => {
       fc.assert(
         fc.property(fc.asciiString(), (nodeEnv) => {
-          fc.pre(nodeEnv !== ""); // "", e.g. no env set, is also production
           process.env.NODE_ENV = nodeEnv;
-          return isProductionEnv() === false && isNotProductionEnv() === !isProductionEnv();
+          return isDevEnv() === false && isNotDevEnv() === !isDevEnv();
         })
       ),
         FAST_CHECK_OPTIONS;
@@ -53,10 +52,9 @@ describe("isProductionEnv()", () => {
     it(`should return false for any random "non-string" type value`, () => {
       fc.assert(
         fc.property(fc.anything(), (nodeEnv) => {
-          fc.pre(typeof nodeEnv !== "string" && !PRODUCTION_NODE_ENVS.includes(nodeEnv));
-          fc.pre(`${nodeEnv}` !== ""); // some types are empty strings when toString(), avoid those
+          fc.pre(typeof nodeEnv !== "string" && !DEV_NODE_ENVS.includes(nodeEnv));
           process.env.NODE_ENV = nodeEnv;
-          return isProductionEnv() === false && isNotProductionEnv() === !isProductionEnv();
+          return isDevEnv() === false && isNotDevEnv() === !isDevEnv();
         })
       ),
         FAST_CHECK_OPTIONS;
