@@ -27,7 +27,8 @@
     "lint": "eslint '**/*.{js,json,ts}'",
     "lint:compile": "tsc --noEmit && eslint '**/*.{js,json,ts}'",
     "lint:fix": "eslint --fix '**/*.{js,json,ts}'",
-    "test": "jest"
+    "test": "jest",
+    "test:changed": "jest --onlyChanged"
   },
   "dependencies": {},
   "devDependencies": {
@@ -35,6 +36,7 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.12",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "eslint": "^6.4.0",
