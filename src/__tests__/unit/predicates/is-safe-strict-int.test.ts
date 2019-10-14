@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-hooks */
 import fc from "fast-check";
 
 import { FAST_CHECK_OPTIONS } from "../../config";
@@ -68,6 +67,19 @@ describe("isSafeStrictInt()", () => {
             );
           }
         )
+      ),
+        FAST_CHECK_OPTIONS;
+    });
+
+    it("should return false for digit strings - i.e. not strict number type", () => {
+      fc.assert(
+        fc.property(fc.maxSafeInteger(), (value) => {
+          const digitString = `${value}`;
+          return (
+            isSafeStrictInt(digitString) === false &&
+            isNotSafeStrictInt(digitString) === !isSafeStrictInt(digitString)
+          );
+        })
       ),
         FAST_CHECK_OPTIONS;
     });

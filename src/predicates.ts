@@ -13,7 +13,8 @@ export const isNotProductionEnv = () => !isProductionEnv();
  * @param {any} value = anything
  * @returns {bool} true if it is an integer, false otherwise
  */
-export const isStrictInt = (value: any) => RE_STRICT_INT.test(value);
+export const isStrictInt = (value: any) =>
+  typeof value === "number" && RE_STRICT_INT.test((value as unknown) as string); // any type works
 
 /**
  * Determine if a value is not a signed integer. There are no lower or upper bound constraints.
