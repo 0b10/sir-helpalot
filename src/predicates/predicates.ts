@@ -53,3 +53,6 @@ export const isSafeStrictInt: Monadic = (value: any) =>
  * @returns {boolean} true if it is not a strict integer within the specified boundaries, false otherwise
  */
 export const isNotSafeStrictInt: Monadic = (value: any) => !isSafeStrictInt(value);
+
+// TODO: implement and test these
+// const isNonEmptyString = (val: any) => typeof val === "string" && val !== "";
