@@ -9,7 +9,7 @@ import _ from "lodash";
  *
  * @param {T} obj - any object
  * @param {string[]} remove - an array of keys to remove
- * @param {boolean} useClone - should the object be cloned first? The reqult will be a new object if
+ * @param {boolean} useClone - should the object be cloned first? The result will be a new object if
  *  so
  * @returns {object} An object of the same shape, minus the desired keys
  */
