@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*",
+    "**/*.test"
+  ],
+  "extends": "./tsconfig",
+  "include": [
+    "src/**/*"
+  ]
+}

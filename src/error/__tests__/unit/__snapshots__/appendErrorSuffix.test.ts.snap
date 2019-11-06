@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`for arrays should return a string with a message, type, and value when showValue is true 1`] = `
+"a test message: 
+	type:		array
+	value:	[1,2,3]
+"
+`;
+
+exports[`for arrays should return a string with only a message and a type when showValue is false 1`] = `
+"a test message: 
+	type:		array
+"
+`;
+
+exports[`for arrays should return a string with only a message when no options are given 1`] = `"a test message"`;
+
+exports[`for functions should return a string with a message, type, and value when showValue is true 1`] = `
+"a test message: 
+	type:		function
+	value:	input()
+"
+`;
+
+exports[`for functions should return a string with only a message and a type when showValue is false 1`] = `
+"a test message: 
+	type:		function
+"
+`;
+
+exports[`for functions should return a string with only a message when no options are given 1`] = `"a test message"`;
+
+exports[`for mixed arrays should return a string with a message, type, and value when showValue is true 1`] = `
+"a test message: 
+	type:		array
+	value:	[function,object,error,null,undefined]
+"
+`;
+
+exports[`for mixed arrays should return a string with only a message and a type when showValue is false 1`] = `
+"a test message: 
+	type:		array
+"
+`;
+
+exports[`for mixed arrays should return a string with only a message when no options are given 1`] = `"a test message"`;
+
+exports[`for strings should return a string with a message, type, and value when showValue is true 1`] = `
+"a test message: 
+	type:		string
+	value:	a fake value string
+"
+`;
+
+exports[`for strings should return a string with only a message and a type when showValue is false 1`] = `
+"a test message: 
+	type:		string
+"
+`;
+
+exports[`for strings should return a string with only a message when no options are given 1`] = `"a test message"`;

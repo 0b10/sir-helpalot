@@ -1,10 +1,16 @@
+import _ from "lodash";
+
 import { DEV_NODE_ENVS, PRODUCTION_NODE_ENVS, RE_STRICT_INT } from "./constants";
 import { Monadic } from "./types";
 
-export const isDevEnv = () => DEV_NODE_ENVS.includes(process.env.NODE_ENV as string); // string | undefined is okay
-export const isNotDevEnv = () => !isDevEnv();
-export const isProductionEnv = () => PRODUCTION_NODE_ENVS.includes(process.env.NODE_ENV as string); // string | undefined is okay
-export const isNotProductionEnv = () => !isProductionEnv();
+const NODE_ENV = process.env.NODE_ENV;
+
+export const isDevEnv = (forTesting?: any) =>
+  DEV_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+export const isNotDevEnv = (forTesting?: any) => !isDevEnv(forTesting);
+export const isProductionEnv = (forTesting?: any) =>
+  PRODUCTION_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+export const isNotProductionEnv = (forTesting?: any) => !isProductionEnv(forTesting);
 
 /**
  * Determine if a value is a signed integer. There are no lower or upper bound constraints.

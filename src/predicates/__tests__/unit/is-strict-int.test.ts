@@ -1,6 +1,5 @@
 import fc from "fast-check";
 
-import { FAST_CHECK_OPTIONS } from "../../../__tests__/config";
 import { isStrictInt, isNotStrictInt } from "../../predicates";
 
 describe("isStrictInt()", () => {
@@ -16,7 +15,7 @@ describe("isStrictInt()", () => {
           return isStrictInt(value) === true && isNotStrictInt(value) === !isStrictInt(value);
         })
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
   });
 
@@ -31,7 +30,7 @@ describe("isStrictInt()", () => {
           );
         })
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
   });
 
@@ -39,11 +38,11 @@ describe("isStrictInt()", () => {
     it("should return false for random non-integer values", () => {
       fc.assert(
         fc.property(fc.anything(), (value) => {
-          fc.pre(!/^-?\d+/.test(value)); // not a digit
+          fc.pre(!/^-?\d+/.test(value as string)); // not a digit
           return isStrictInt(value) === false && isNotStrictInt(value) === !isStrictInt(value);
         })
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
   });
 });

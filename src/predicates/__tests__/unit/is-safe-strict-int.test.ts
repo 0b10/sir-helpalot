@@ -1,6 +1,5 @@
 import fc from "fast-check";
 
-import { FAST_CHECK_OPTIONS } from "../../../__tests__/config";
 import { isSafeStrictInt, isNotSafeStrictInt } from "../../predicates";
 
 describe("isSafeStrictInt()", () => {
@@ -19,7 +18,7 @@ describe("isSafeStrictInt()", () => {
           );
         })
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
 
     it("should return true for values just of the inside upper boundary", () => {
@@ -52,7 +51,7 @@ describe("isSafeStrictInt()", () => {
           }
         )
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
 
     it("should return false for integers < MIN_SAFE_INTEGER", () => {
@@ -68,7 +67,7 @@ describe("isSafeStrictInt()", () => {
           }
         )
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
 
     it("should return false for digit strings - i.e. not strict number type", () => {
@@ -81,7 +80,7 @@ describe("isSafeStrictInt()", () => {
           );
         })
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
 
     // These boundary tests are risky, because they go beyond safe limits. You might need to adapt them
@@ -105,14 +104,14 @@ describe("isSafeStrictInt()", () => {
     it("should return false for random non-integer values", () => {
       fc.assert(
         fc.property(fc.anything(), (value) => {
-          fc.pre(!/^-?\d+/.test(value)); // not a digit
+          fc.pre(!/^-?\d+/.test(value as string)); // not a digit
           return (
             isSafeStrictInt(value) === false &&
             isNotSafeStrictInt(value) === !isSafeStrictInt(value)
           );
         })
       ),
-        FAST_CHECK_OPTIONS;
+        { verbose: true };
     });
   });
 });
