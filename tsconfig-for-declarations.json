@@ -1,17 +1,10 @@
 {
-  "extends": "./tsconfig",
+  "extends": "./tsconfig-for-building",
   "compilerOptions": {
+    "noEmit": false,
     "allowJs": false,
     "declaration": true,
     "emitDeclarationOnly": true,
     "isolatedModules": false
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__/*",
-    "**/*.test"
-  ]
+  }
 }

@@ -20,7 +20,7 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig-for-building.json",
+    "build": "yarn build:clean && tsc -p tsconfig-for-building.json && tsc -p tsconfig-for-declarations.json && tree dist/",
     "build:clean": "rm -rfv dist/*",
     "build:publish": "yarn run lint && yarn run test && yarn run build:clean && yarn run build && yarn run build:types && cp README.md package.json dist/ && yarn publish",
     "build:types": "tsc -p tsconfig-for-declarations.json",

@@ -1,11 +1,14 @@
 {
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "noEmit": false
+  },
   "exclude": [
     "node_modules",
     "**/__tests__/*",
-    "**/*.test"
-  ],
-  "extends": "./tsconfig",
-  "include": [
-    "src/**/*"
+    "**/*.test",
+    "**/__mocks__/*",
+    "**/types",
+    "**/interfaces"
   ]
 }
