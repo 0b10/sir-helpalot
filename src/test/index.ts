@@ -20,7 +20,7 @@ const _conditionallyFreeze = <T>(
 ): Readonly<T> | T => {
   if (args && _.isBoolean(args.immutable)) {
     // when args.immutable is boolean, it has been manually set - this value now takes precedence.
-    //  However, t's undefined by default
+    //  However, it's undefined by default
     return args.immutable ? Object.freeze(obj) : obj;
   }
   return defaultImmutable ? Object.freeze(obj) : obj;
@@ -30,8 +30,8 @@ const _conditionallyFreeze = <T>(
  * A flexible closure to provide fixture data in a way that reduces test code. Pass in an
  *  object to the closure, which will represent any arguments you will use in tests. This object
  *  represents the default values that you require, and the returned function allows you to override
- *  those values, or completely remove keys. The result object can also be immutable, to provide
- *  some extra safety during tests.
+ *  those values, or completely remove keys. The resulting object can also be made immutable, to
+ *  provide some extra safety during tests.
  *
  * NOTE: defaults and overrides are deep cloned, so there is no need to freeze, or clone them. The
  *  function was written with safety (data integrity) in mind.
@@ -43,7 +43,7 @@ const _conditionallyFreeze = <T>(
  * @param {FixtureOptions} options - { immutable: true } - The object produced by the inner function
  *  (aka helper) is immutable by default. This can be overridden via the helper.
  *
- * @returns {Function} A helper function: (overrides, options) => {...defaults, ...overrides}
+ * @returns {Function} A helper function: (overrides, options) => ({...defaults, ...overrides})
  *
  * options = { overrides?, exclude?, immutable? }
  *
@@ -99,7 +99,7 @@ export const fixture = <T extends object>(
   function helper<K extends keyof T>(args?: HelperArgs<T, K>): any {
     if (args) {
       const clonedOverrides = _.cloneDeep(args.overrides);
-      let merged = { ...clonedDefaults, ...clonedOverrides };
+      const merged = { ...clonedDefaults, ...clonedOverrides };
 
       // remove keys
       if (!_.isUndefined(args.exclude)) {
