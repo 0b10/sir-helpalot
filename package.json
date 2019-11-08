@@ -17,8 +17,9 @@
   "license": "MIT",
   "author": "0b10 <0b10@pm.me>",
   "files": [
-    "dist/*"
+    "dist/"
   ],
+  "main": "dist/index.js",
   "scripts": {
     "build": "yarn build:clean && tsc -p tsconfig-for-building.json && tsc -p tsconfig-for-declarations.json && tree dist/",
     "build:clean": "rm -rfv dist/*",
