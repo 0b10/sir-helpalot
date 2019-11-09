@@ -1,9 +1,10 @@
-interface HelperArgs<T, K, I = boolean> {
+export interface HelperArgs<T, K, I = boolean> {
     overrides?: Partial<T>;
     exclude?: K[];
     immutable?: I;
 }
-interface FixtureOptions {
+export declare type ImmutableArg = Pick<HelperArgs<any, any>, "immutable">;
+export interface FixtureOptions {
     immutable: boolean;
 }
 /**
@@ -64,4 +65,3 @@ export declare const fixture: <T extends object>(defaults: T, { immutable }?: Fi
     <K_2 extends keyof T, I_2 extends false>(args?: HelperArgs<T, K_2, I_2> | undefined): Pick<T, Exclude<keyof T, K_2>>;
     <K_3 extends keyof T, I_3 extends true>(args?: HelperArgs<T, K_3, I_3> | undefined): Readonly<Pick<T, Exclude<keyof T, K_3>>>;
 };
-export {};

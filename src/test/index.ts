@@ -1,15 +1,15 @@
 import _ from "lodash";
 
 import { removeKeys } from "../object";
-interface HelperArgs<T, K, I = boolean> {
+export interface HelperArgs<T, K, I = boolean> {
   overrides?: Partial<T>;
   exclude?: K[];
   immutable?: I;
 }
 
-type ImmutableArg = Pick<HelperArgs<any, any>, "immutable">;
+export type ImmutableArg = Pick<HelperArgs<any, any>, "immutable">;
 
-interface FixtureOptions {
+export interface FixtureOptions {
   immutable: boolean;
 }
 
