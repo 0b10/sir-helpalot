@@ -24,6 +24,7 @@ export const getDisplayValueAndType = (value: any): DisplayValueAndType => {
   const _type: Type = type(value);
   switch (_type) {
     case "set":
+      // TODO: parse the array used in the set, it could get messy
       return { displayValue: `Set {${[...value]}}`, type: _type }; // curly braces, and data
     case "array":
       const stubbedArray = value.map((item: any) => {
