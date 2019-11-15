@@ -3,13 +3,12 @@ import _ from "lodash";
 
 import safeStringify from "fast-safe-stringify";
 
-import { getDisplayValueAndType, DisplayValueAndType } from "../../index";
+import { getDisplayValueAndType, DisplayValueAndType, MAX_ARRAY_DISPLAY_SIZE } from "../../index";
 import { Type } from "../../../type";
 
 interface DirectValues {
   input: any;
   description: string;
-  expected: DisplayValueAndType;
 }
 
 interface Fixture {
@@ -33,12 +32,10 @@ const fixtures: Fixture[] = [
       {
         input: "",
         description: 'should return "string" as type and "" for the displayValue',
-        expected: { type: "string", displayValue: '""' },
       },
       {
         input: "test",
         description: 'should return "string" as type and "test" for the displayValue',
-        expected: { type: "string", displayValue: "test" },
       },
     ],
     properties: {
@@ -56,12 +53,10 @@ const fixtures: Fixture[] = [
       {
         input: true,
         description: 'should return "boolean" as type and "true" for the displayValue',
-        expected: { type: "boolean", displayValue: "true" },
       },
       {
         input: false,
         description: 'should return "boolean" as type and "false" for the displayValue',
-        expected: { type: "boolean", displayValue: "false" },
       },
     ],
   },
@@ -72,12 +67,10 @@ const fixtures: Fixture[] = [
       {
         input: 1,
         description: 'should return "number" as type and "1" for the displayValue',
-        expected: { type: "number", displayValue: "1" },
       },
       {
         input: 1.1,
         description: 'should return "number" as type and "1.1" for the displayValue',
-        expected: { type: "number", displayValue: "1.1" },
       },
     ],
     properties: {
@@ -88,6 +81,28 @@ const fixtures: Fixture[] = [
       expectedType: "number",
     },
   },
+  // +++ bigint +++
+  {
+    targetType: "bigint",
+    directValues: [
+      {
+        input: BigInt(1),
+        description: 'should return "bigint" as type and "1n" for the displayValue',
+      },
+      {
+        input: BigInt(0),
+        description: 'should return "bigint" as type and "0n" for the displayValue',
+      },
+      {
+        input: BigInt(-23984786),
+        description: 'should return "bigint" as type and "-23984786n" for the displayValue',
+      },
+      {
+        input: BigInt(873487687),
+        description: 'should return "bigint" as type and "873487687n" for the displayValue',
+      },
+    ],
+  },
   // +++ set +++
   {
     targetType: "set",
@@ -95,23 +110,19 @@ const fixtures: Fixture[] = [
       {
         input: new Set([]),
         description: 'should return "set" as type and "Set {}" for the displayValue',
-        expected: { type: "set", displayValue: "Set {}" },
       },
       {
         input: new Set([1, 2, 3]),
         description: 'should return "set" as type and "Set {1,2,3}" for the displayValue',
-        expected: { type: "set", displayValue: "Set {1,2,3}" },
       },
       {
         input: new Set([[1, 2, 3], [4, 5, 6]]),
         description: 'should return "set" as type and "Set {1,2,3,4,5,6}" for the displayValue',
-        expected: { type: "set", displayValue: "Set {1,2,3,4,5,6}" },
       },
       {
         input: new Set([{ a: "a" }, { b: "b" }]),
         description:
           'should return "set" as type and "Set {[object Object],[object Object]}" for the displayValue',
-        expected: { type: "set", displayValue: "Set {[object Object],[object Object]}" },
       },
     ],
   },
@@ -122,33 +133,27 @@ const fixtures: Fixture[] = [
       {
         input: [],
         description: "should return the correct type/displayValue when given an empty array",
-        expected: { type: "array", displayValue: "[]" },
       },
       {
         input: [1, 2, 3],
         description: "should return the correct type/displayValue when given an array of integers",
-        expected: { type: "array", displayValue: "[1,2,3]" },
       },
       {
         input: ["string1", "string2"],
         description: "should return the correct type/displayValue when given an array of strings",
-        expected: { type: "array", displayValue: '["string1","string2"]' },
       },
       {
         input: ["", ""],
         description:
           "should return the correct type/displayValue when given an array of empty strings",
-        expected: { type: "array", displayValue: '["",""]' },
       },
       {
         input: [{ a: "a" }, { b: "b" }],
         description: "should return the correct type/displayValue when given an array of objects",
-        expected: { type: "array", displayValue: "[object,object]" },
       },
       {
         input: [1.0, 1.1, 1.2],
         description: "should return the correct type/displayValue when given an array of floats",
-        expected: { type: "array", displayValue: "[1,1.1,1.2]" }, // I don't really care about 1.0 => 1
       },
       {
         input: [
@@ -158,17 +163,46 @@ const fixtures: Fixture[] = [
           },
         ],
         description: "should return the correct type/displayValue when given an array of functions",
-        expected: { type: "array", displayValue: "[function,function]" },
       },
       {
         input: [null],
         description: "should return the correct type/displayValue when given an array of null",
-        expected: { type: "array", displayValue: "[null]" },
       },
       {
         input: [undefined, undefined],
         description: "should return the correct type/displayValue when given an array of undefined",
-        expected: { type: "array", displayValue: "[undefined,undefined]" },
+      },
+      {
+        input: [
+          [1, 2, ["a", "b", [() => null, {}]]],
+          [
+            [new Error("arbitrary message"), 5, null, BigInt(1)],
+            [undefined, 8, [() => null, true, [1.1, 10, new Set([1, 2, [4, 5, 6]])]]],
+          ],
+        ],
+        description: "should return a correctly recusrively resolved array",
+      },
+      {
+        input: _.fill(Array(MAX_ARRAY_DISPLAY_SIZE + 1), "a"),
+        description: `should return the type instead of the display value when length > ${MAX_ARRAY_DISPLAY_SIZE}`,
+      },
+      {
+        input: _.fill(
+          Array(MAX_ARRAY_DISPLAY_SIZE),
+          _.fill(Array(MAX_ARRAY_DISPLAY_SIZE + 1), "a")
+        ),
+        description: `should return an array of "array" types, when sub-arrays are too large`,
+      },
+      {
+        input: _.fill(
+          Array(MAX_ARRAY_DISPLAY_SIZE + 1),
+          _.fill(Array(MAX_ARRAY_DISPLAY_SIZE + 1), "a")
+        ),
+        description: `should return just "array" type when it contains too many large arrays`,
+      },
+      {
+        input: _.fill(Array(10), _.fill(Array(2), _.fill(Array(MAX_ARRAY_DISPLAY_SIZE + 1), "a"))),
+        description: `should return an array of arrays with "array" types, when sub-sub-arrays are too large`,
       },
     ],
   },
@@ -180,7 +214,6 @@ const fixtures: Fixture[] = [
         input: () => null,
         description:
           'should return "function" as type and a stubbed function string for the displayValue',
-        expected: { type: "function", displayValue: "input()" },
       },
     ],
   },
@@ -192,22 +225,16 @@ const fixtures: Fixture[] = [
         input: { a: "a" },
         description:
           "should return the correct type/displayValue when given an object with one prop",
-        expected: { type: "object", displayValue: safeStringify({ a: "a" }, undefined, 2) },
       },
       {
         input: { a: "a", b: { c: "c" } },
         description:
           "should return the correct type/displayValue when given an object with no two props and nested object",
-        expected: {
-          type: "object",
-          displayValue: safeStringify({ a: "a", b: { c: "c" } }, undefined, 2),
-        },
       },
       {
         input: {},
         description:
           "should return the correct type/displayValue when given an object with no props",
-        expected: { type: "object", displayValue: "{}" },
       },
     ],
   },
@@ -216,10 +243,10 @@ const fixtures: Fixture[] = [
 fixtures.forEach(({ targetType, directValues, properties }) => {
   describe(`for ${targetType} values`, () => {
     if (directValues) {
-      directValues.forEach(({ description, input, expected }) => {
+      directValues.forEach(({ description, input }) => {
         it(description, () => {
           const failureMessage = `${{ input }}`;
-          expect(getDisplayValueAndType(input), failureMessage).toStrictEqual(expected);
+          expect(getDisplayValueAndType(input), failureMessage).toMatchSnapshot();
         });
       });
     }

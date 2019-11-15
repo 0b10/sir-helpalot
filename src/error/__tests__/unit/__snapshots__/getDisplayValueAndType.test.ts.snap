@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`for array values should return a correctly recusrively resolved array 1`] = `
+Object {
+  "displayValue": "[[1,2,[\\"a\\",\\"b\\",[function,object]]],[[error,5,null,bigint],[undefined,8,[function,true,[1.1,10,set]]]]]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return an array of "array" types, when sub-arrays are too large 1`] = `
+Object {
+  "displayValue": "[array,array,array,array,array,array,array,array,array,array,array,array,array,array,array,array,array,array,array,array]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return an array of arrays with "array" types, when sub-sub-arrays are too large 1`] = `
+Object {
+  "displayValue": "[[array,array],[array,array],[array,array],[array,array],[array,array],[array,array],[array,array],[array,array],[array,array],[array,array]]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return just "array" type when it contains too many large arrays 1`] = `
+Object {
+  "displayValue": "array",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of empty strings 1`] = `
+Object {
+  "displayValue": "[\\"\\",\\"\\"]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of floats 1`] = `
+Object {
+  "displayValue": "[1,1.1,1.2]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of functions 1`] = `
+Object {
+  "displayValue": "[function,function]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of integers 1`] = `
+Object {
+  "displayValue": "[1,2,3]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of null 1`] = `
+Object {
+  "displayValue": "[null]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of objects 1`] = `
+Object {
+  "displayValue": "[object,object]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of strings 1`] = `
+Object {
+  "displayValue": "[\\"string1\\",\\"string2\\"]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an array of undefined 1`] = `
+Object {
+  "displayValue": "[undefined,undefined]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the correct type/displayValue when given an empty array 1`] = `
+Object {
+  "displayValue": "[]",
+  "type": "array",
+}
+`;
+
+exports[`for array values should return the type instead of the display value when length > 20 1`] = `
+Object {
+  "displayValue": "array",
+  "type": "array",
+}
+`;
+
+exports[`for bigint values should return "bigint" as type and "-23984786n" for the displayValue 1`] = `
+Object {
+  "displayValue": "-23984786n",
+  "type": "bigint",
+}
+`;
+
+exports[`for bigint values should return "bigint" as type and "0n" for the displayValue 1`] = `
+Object {
+  "displayValue": "0n",
+  "type": "bigint",
+}
+`;
+
+exports[`for bigint values should return "bigint" as type and "1n" for the displayValue 1`] = `
+Object {
+  "displayValue": "1n",
+  "type": "bigint",
+}
+`;
+
+exports[`for bigint values should return "bigint" as type and "873487687n" for the displayValue 1`] = `
+Object {
+  "displayValue": "873487687n",
+  "type": "bigint",
+}
+`;
+
+exports[`for boolean values should return "boolean" as type and "false" for the displayValue 1`] = `
+Object {
+  "displayValue": "false",
+  "type": "boolean",
+}
+`;
+
+exports[`for boolean values should return "boolean" as type and "true" for the displayValue 1`] = `
+Object {
+  "displayValue": "true",
+  "type": "boolean",
+}
+`;
+
+exports[`for function values should return "function" as type and a stubbed function string for the displayValue 1`] = `
+Object {
+  "displayValue": "input()",
+  "type": "function",
+}
+`;
+
+exports[`for number values should return "number" as type and "1" for the displayValue 1`] = `
+Object {
+  "displayValue": "1",
+  "type": "number",
+}
+`;
+
+exports[`for number values should return "number" as type and "1.1" for the displayValue 1`] = `
+Object {
+  "displayValue": "1.1",
+  "type": "number",
+}
+`;
+
+exports[`for object values should return the correct type/displayValue when given an object with no props 1`] = `
+Object {
+  "displayValue": "{}",
+  "type": "object",
+}
+`;
+
+exports[`for object values should return the correct type/displayValue when given an object with no two props and nested object 1`] = `
+Object {
+  "displayValue": "{
+  \\"a\\": \\"a\\",
+  \\"b\\": {
+    \\"c\\": \\"c\\"
+  }
+}",
+  "type": "object",
+}
+`;
+
+exports[`for object values should return the correct type/displayValue when given an object with one prop 1`] = `
+Object {
+  "displayValue": "{
+  \\"a\\": \\"a\\"
+}",
+  "type": "object",
+}
+`;
+
+exports[`for set values should return "set" as type and "Set {[object Object],[object Object]}" for the displayValue 1`] = `
+Object {
+  "displayValue": "Set {object,object}",
+  "type": "set",
+}
+`;
+
+exports[`for set values should return "set" as type and "Set {}" for the displayValue 1`] = `
+Object {
+  "displayValue": "Set {}",
+  "type": "set",
+}
+`;
+
+exports[`for set values should return "set" as type and "Set {1,2,3,4,5,6}" for the displayValue 1`] = `
+Object {
+  "displayValue": "Set {[1,2,3],[4,5,6]}",
+  "type": "set",
+}
+`;
+
+exports[`for set values should return "set" as type and "Set {1,2,3}" for the displayValue 1`] = `
+Object {
+  "displayValue": "Set {1,2,3}",
+  "type": "set",
+}
+`;
+
+exports[`for string values should return "string" as type and "" for the displayValue 1`] = `
+Object {
+  "displayValue": "\\"\\"",
+  "type": "string",
+}
+`;
+
+exports[`for string values should return "string" as type and "test" for the displayValue 1`] = `
+Object {
+  "displayValue": "test",
+  "type": "string",
+}
+`;

@@ -3,7 +3,8 @@ import safeStringify from "fast-safe-stringify";
 import { type, Type } from "../type";
 import { SirHelpalotPreconditionError } from "../exception";
 
-const MAX_OBJECT_DISPLAY_SIZE = 200;
+export const MAX_OBJECT_DISPLAY_SIZE = 200;
+export const MAX_ARRAY_DISPLAY_SIZE = 20;
 
 export interface ErrorValues {
   [key: string]: any;
@@ -19,24 +20,33 @@ export interface DisplayValueAndType {
   type: Type;
 }
 
+const _getStubbedArray = (arr: any[]): any[] => {
+  return arr.map((item: any) => {
+    if (_.isArray(item)) {
+      const { displayValue, type } = getDisplayValueAndType(item); // ! be careful, pass in item, not arr - else possible recursion error
+      return item.length > MAX_ARRAY_DISPLAY_SIZE ? type : displayValue;
+    }
+    if (_.isNumber(item) || _.isBoolean(item)) {
+      return item;
+    }
+    if (_.isString(item)) {
+      return `"${item}"`;
+    }
+    return type(item);
+  });
+};
+
 // eslint-disable-next-line complexity
 export const getDisplayValueAndType = (value: any): DisplayValueAndType => {
   const _type: Type = type(value);
   switch (_type) {
     case "set":
-      // TODO: parse the array used in the set, it could get messy
-      return { displayValue: `Set {${[...value]}}`, type: _type }; // curly braces, and data
+      const stubbedArray = _getStubbedArray([...value]);
+      return { displayValue: `Set {${stubbedArray}}`, type: _type }; // curly braces, and data
     case "array":
-      const stubbedArray = value.map((item: any) => {
-        if (_.isNumber(item) || _.isBoolean(item)) {
-          return item;
-        }
-        if (_.isString(item)) {
-          return `"${item}"`;
-        }
-        return type(item);
-      });
-      return { displayValue: `[${stubbedArray}]`, type: _type }; // square brackets
+      // return type as ddisplayValue if it's too large. This covers a top level array - nested arrays are formatted by _getStubbedArray()
+      const dv = value.length > MAX_ARRAY_DISPLAY_SIZE ? _type : `[${_getStubbedArray(value)}]`;
+      return { displayValue: dv, type: _type }; // square brackets
     case "string":
       return { displayValue: value ? value : '""', type: _type }; // empty string as ""
     case "function":
@@ -50,6 +60,8 @@ export const getDisplayValueAndType = (value: any): DisplayValueAndType => {
         displayValue: result.length > MAX_OBJECT_DISPLAY_SIZE ? (value as string) : result,
         type: _type,
       };
+    case "bigint":
+      return { displayValue: `${value}n`, type: _type }; // conversion to string removes 'n'
     default:
       return { displayValue: `${value}`, type: _type };
   }
