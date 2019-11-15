@@ -1,6 +1,9 @@
 import { Type } from "../type";
+export interface ErrorValues {
+    [key: string]: any;
+}
 export interface ErrorOptions {
-    value: any;
+    values: ErrorValues;
     showValue?: boolean;
 }
 export interface DisplayValueAndType {
@@ -15,4 +18,4 @@ export declare const getDisplayValueAndType: (value: any) => DisplayValueAndType
  * @param {ErrorOptions} options - Control what is appended
  * @returns {string} A string in the form of "message: \n\t suffix"
  */
-export declare const appendErrorSuffix: (message: string, options?: Pick<ErrorOptions, "value" | "showValue"> | undefined) => string;
+export declare const appendErrorSuffix: (message: string, options?: ErrorOptions | undefined) => string;

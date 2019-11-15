@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const lodash_1 = __importDefault(require("lodash"));
 const fast_safe_stringify_1 = __importDefault(require("fast-safe-stringify"));
 const type_1 = require("../type");
+const exception_1 = require("../exception");
 const MAX_OBJECT_DISPLAY_SIZE = 200;
 // eslint-disable-next-line complexity
 exports.getDisplayValueAndType = (value) => {
@@ -51,12 +52,25 @@ exports.getDisplayValueAndType = (value) => {
 exports.appendErrorSuffix = (message, options) => {
     let suffix;
     if (options) {
-        suffix = "\n";
-        const { displayValue, type } = exports.getDisplayValueAndType(options.value);
-        suffix += `\ttype:\t\t${type}\n`;
-        if (options.showValue) {
-            suffix += `\tvalue:\t${displayValue}\n`;
+        const { values } = options;
+        if (!lodash_1.default.isPlainObject(values)) {
+            throw new exception_1.SirHelpalotPreconditionError(`error values must be contained within an object`, {
+                values: { values },
+                showValue: true,
+            });
         }
+        if (lodash_1.default.isUndefined(options.showValue)) {
+            options.showValue = true; // enable by default, because large output is filtered anyway
+        }
+        suffix = "\n";
+        Object.entries(options.values).forEach(([key, value]) => {
+            const { displayValue, type } = exports.getDisplayValueAndType(value);
+            suffix += `\t--\n\t\t\tname\t\t: ${key}\n\t\t\ttype\t\t: ${type}\n`;
+            if (options.showValue) {
+                suffix += `\t\t\tvalue\t\t: ${displayValue}\n`;
+            }
+        });
+        suffix += "\t--";
     }
     return suffix !== undefined ? `${message}: ${suffix}` : message;
 };

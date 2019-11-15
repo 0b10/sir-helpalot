@@ -1,11 +1,16 @@
 import _ from "lodash";
 import safeStringify from "fast-safe-stringify";
 import { type, Type } from "../type";
+import { SirHelpalotPreconditionError } from "../exception";
 
 const MAX_OBJECT_DISPLAY_SIZE = 200;
 
+export interface ErrorValues {
+  [key: string]: any;
+}
+
 export interface ErrorOptions {
-  value: any;
+  values: ErrorValues;
   showValue?: boolean;
 }
 
@@ -53,24 +58,49 @@ export const getDisplayValueAndType = (value: any): DisplayValueAndType => {
  * Append various details about the value causing the error
  *
  * @param {string} message - The error message to be appended
- * @param {ErrorOptions} options - Control what is appended
+ * @param {ErrorOptions} options - Control what is appended:-
+ *
+ *  { values: object, showValue?: boolean }
+ *
+ *  values is an object, whose keys are the names of the variables.
+ *
+ *  showValue is enabled by default, and constrols whether the value of the variable/property is
+ *  displayed. Large output is filtered, things like functions, and large objects. Strings and numbers
+ *  are not. When a value is filtered, it is replaced with a placeholder value - sometimes a type,
+ *  othertimes: someFunc()
+ *
  * @returns {string} A string in the form of "message: \n\t suffix"
+ *
+ * @example
+ * appendErrorSuffix("foo", { values: { a: "string a", b: "string b" });
  */
-export const appendErrorSuffix = (
-  message: string,
-  options?: Pick<ErrorOptions, "value" | "showValue">
-): string => {
+export const appendErrorSuffix = (message: string, options?: ErrorOptions): string => {
   let suffix: string;
   if (options) {
+    const { values } = options;
+    if (!_.isPlainObject(values)) {
+      throw new SirHelpalotPreconditionError(`error values must be contained within an object`, {
+        values: { values },
+        showValue: true,
+      });
+    }
+
+    if (_.isUndefined(options.showValue)) {
+      options.showValue = true; // enable by default, because large output is filtered anyway
+    }
+
     suffix = "\n";
 
-    const { displayValue, type } = getDisplayValueAndType(options.value);
+    Object.entries(options.values).forEach(([key, value]) => {
+      const { displayValue, type } = getDisplayValueAndType(value);
 
-    suffix += `\ttype:\t\t${type}\n`;
+      suffix += `\t--\n\t\t\tname\t\t: ${key}\n\t\t\ttype\t\t: ${type}\n`;
 
-    if (options.showValue) {
-      suffix += `\tvalue:\t${displayValue}\n`;
-    }
+      if (options.showValue) {
+        suffix += `\t\t\tvalue\t\t: ${displayValue}\n`;
+      }
+    });
+    suffix += "\t--";
   }
   return suffix! !== undefined ? `${message}: ${suffix}` : message;
 };
