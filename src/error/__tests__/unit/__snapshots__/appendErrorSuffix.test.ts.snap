@@ -2,122 +2,122 @@
 
 exports[`for arrays should return a string with a message, type, and value when showValue is true 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: array
-			value		: [1,2,3]
-	--"
+  --
+    name   : input
+    type   : array
+    value  : [1,2,3]
+  --"
 `;
 
 exports[`for arrays should return a string with only a message and a type when showValue is false 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: array
-	--"
+  --
+    name   : input
+    type   : array
+  --"
 `;
 
 exports[`for arrays should return a string with only a message when no options are given 1`] = `"a test message"`;
 
 exports[`for functions should return a string with a message, type, and value when showValue is true 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: function
-			value		: input()
-	--"
+  --
+    name   : input
+    type   : function
+    value  : input()
+  --"
 `;
 
 exports[`for functions should return a string with only a message and a type when showValue is false 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: function
-	--"
+  --
+    name   : input
+    type   : function
+  --"
 `;
 
 exports[`for functions should return a string with only a message when no options are given 1`] = `"a test message"`;
 
 exports[`for mixed arrays should return a string with a message, type, and value when showValue is true 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: array
-			value		: [function,object,error,null,undefined]
-	--"
+  --
+    name   : input
+    type   : array
+    value  : [function,object,error,null,undefined]
+  --"
 `;
 
 exports[`for mixed arrays should return a string with only a message and a type when showValue is false 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: array
-	--"
+  --
+    name   : input
+    type   : array
+  --"
 `;
 
 exports[`for mixed arrays should return a string with only a message when no options are given 1`] = `"a test message"`;
 
 exports[`for strings should return a string with a message, type, and value when showValue is true 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: string
-			value		: a fake value string
-	--"
+  --
+    name   : input
+    type   : string
+    value  : a fake value string
+  --"
 `;
 
 exports[`for strings should return a string with only a message and a type when showValue is false 1`] = `
 "a test message: 
-	--
-			name		: input
-			type		: string
-	--"
+  --
+    name   : input
+    type   : string
+  --"
 `;
 
 exports[`for strings should return a string with only a message when no options are given 1`] = `"a test message"`;
 
 exports[`multiple values should be returned as a string in an expected format 1`] = `
 "a test message: 
-	--
-			name		: a
-			type		: object
-			value		: {
+  --
+    name   : a
+    type   : object
+    value  : {
   \\"foo\\": \\"foo\\",
   \\"bar\\": \\"bar\\"
 }
-	--
-			name		: b
-			type		: array
-			value		: [1,1.1,\\"a string\\"]
-	--
-			name		: c
-			type		: function
-			value		: c()
-	--"
+  --
+    name   : b
+    type   : array
+    value  : [1,1.1,\\"a string\\"]
+  --
+    name   : c
+    type   : function
+    value  : c()
+  --"
 `;
 
 exports[`show value should be enabled by default 1`] = `
 "a test message: 
-	--
-			name		: a
-			type		: boolean
-			value		: true
-	--"
+  --
+    name   : a
+    type   : boolean
+    value  : true
+  --"
 `;
 
 exports[`show value should display the value when explicity asked 1`] = `
 "a test message: 
-	--
-			name		: a
-			type		: boolean
-			value		: true
-	--"
+  --
+    name   : a
+    type   : boolean
+    value  : true
+  --"
 `;
 
 exports[`show value should not display the value when explicity asked not to 1`] = `
 "a test message: 
-	--
-			name		: a
-			type		: boolean
-	--"
+  --
+    name   : a
+    type   : boolean
+  --"
 `;

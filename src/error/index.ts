@@ -107,13 +107,13 @@ export const appendErrorSuffix = (message: string, options?: ErrorOptions): stri
     Object.entries(options.values).forEach(([key, value]) => {
       const { displayValue, type } = getDisplayValueAndType(value);
 
-      suffix += `\t--\n\t\t\tname\t\t: ${key}\n\t\t\ttype\t\t: ${type}\n`;
+      suffix += `  --\n    name   : ${key}\n    type   : ${type}\n`;
 
       if (options.showValue) {
-        suffix += `\t\t\tvalue\t\t: ${displayValue}\n`;
+        suffix += `    value  : ${displayValue}\n`;
       }
     });
-    suffix += "\t--";
+    suffix += "  --";
   }
-  return suffix! !== undefined ? `${message}: ${suffix}` : message;
+  return suffix! !== undefined ? `${message}: ${suffix}` : message; // return just the message if no suffix
 };

@@ -1,9 +1,7 @@
 import fc from "fast-check";
 import _ from "lodash";
 
-import safeStringify from "fast-safe-stringify";
-
-import { getDisplayValueAndType, DisplayValueAndType, MAX_ARRAY_DISPLAY_SIZE } from "../../index";
+import { getDisplayValueAndType, MAX_ARRAY_DISPLAY_SIZE } from "../../index";
 import { Type } from "../../../type";
 
 interface DirectValues {
