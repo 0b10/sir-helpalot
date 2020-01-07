@@ -11,7 +11,8 @@ const NODE_ENV = process.env.NODE_ENV;
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV === "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
@@ -21,7 +22,8 @@ exports.isDevEnv = (forTesting) => constants_1.DEV_NODE_ENVS.has(!lodash_1.defau
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV !== "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
@@ -31,7 +33,8 @@ exports.isNotDevEnv = (forTesting) => !exports.isDevEnv(forTesting);
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV === "test"|"testing"; false otherwise
  */
 exports.isTestEnv = (forTesting) => constants_1.TEST_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
@@ -40,7 +43,8 @@ exports.isTestEnv = (forTesting) => constants_1.TEST_NODE_ENVS.has(!lodash_1.def
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV !== "test"|"testing"; false otherwise
  */
 exports.isNotTestEnv = (forTesting) => !exports.isTestEnv(forTesting);
@@ -49,7 +53,8 @@ exports.isNotTestEnv = (forTesting) => !exports.isTestEnv(forTesting);
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV === "debug"|"trace"; false otherwise
  */
 exports.isDebugEnv = (forTesting) => constants_1.DEBUG_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
@@ -58,7 +63,8 @@ exports.isDebugEnv = (forTesting) => constants_1.DEBUG_NODE_ENVS.has(!lodash_1.d
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV !== "debug"|"trace"; false otherwise
  */
 exports.isNotDebugEnv = (forTesting) => !exports.isDebugEnv(forTesting);
@@ -67,7 +73,8 @@ exports.isNotDebugEnv = (forTesting) => !exports.isDebugEnv(forTesting);
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV === "prod"|"production"|""|undefined; false otherwise
  */
 exports.isProductionEnv = (forTesting) => constants_1.PRODUCTION_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
@@ -76,7 +83,8 @@ exports.isProductionEnv = (forTesting) => constants_1.PRODUCTION_NODE_ENVS.has(!
  *
  * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
  *
- * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @param {ForTestingNodeEnv} forTesting - An object that takes a single property - nodeEnv, which
+ *  serves as a fake NODE_ENV to test against. This param is only for testing purposes.
  * @returns {boolean} true if NODE_ENV !== "prod"|"production"|""|undefined; false otherwise
  */
 exports.isNotProductionEnv = (forTesting) => !exports.isProductionEnv(forTesting);
