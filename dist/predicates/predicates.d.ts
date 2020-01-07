@@ -1,4 +1,7 @@
 import { Monadic } from './types';
+interface ForTestingNodeEnv {
+    nodeEnv: any;
+}
 /**
  * Determine if a development NODE_ENV has been set.
  *
@@ -8,7 +11,7 @@ import { Monadic } from './types';
  * @returns {boolean} true if NODE_ENV === "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
-export declare const isDevEnv: (forTesting?: any) => boolean;
+export declare const isDevEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a development NODE_ENV has not been set.
  *
@@ -18,7 +21,7 @@ export declare const isDevEnv: (forTesting?: any) => boolean;
  * @returns {boolean} true if NODE_ENV !== "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
-export declare const isNotDevEnv: (forTesting?: any) => boolean;
+export declare const isNotDevEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a test NODE_ENV has been set.
  *
@@ -27,7 +30,7 @@ export declare const isNotDevEnv: (forTesting?: any) => boolean;
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "test"|"testing"; false otherwise
  */
-export declare const isTestEnv: (forTesting?: any) => boolean;
+export declare const isTestEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a test NODE_ENV has not been set.
  *
@@ -36,7 +39,7 @@ export declare const isTestEnv: (forTesting?: any) => boolean;
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV !== "test"|"testing"; false otherwise
  */
-export declare const isNotTestEnv: (forTesting?: any) => boolean;
+export declare const isNotTestEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a debug NODE_ENV has been set.
  *
@@ -45,7 +48,7 @@ export declare const isNotTestEnv: (forTesting?: any) => boolean;
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "debug"|"trace"; false otherwise
  */
-export declare const isDebugEnv: (forTesting?: any) => boolean;
+export declare const isDebugEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a debug NODE_ENV has not been set.
  *
@@ -54,7 +57,7 @@ export declare const isDebugEnv: (forTesting?: any) => boolean;
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV !== "debug"|"trace"; false otherwise
  */
-export declare const isNotDebugEnv: (forTesting?: any) => boolean;
+export declare const isNotDebugEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a production NODE_ENV has been set.
  *
@@ -63,7 +66,7 @@ export declare const isNotDebugEnv: (forTesting?: any) => boolean;
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "prod"|"production"|""|undefined; false otherwise
  */
-export declare const isProductionEnv: (forTesting?: any) => boolean;
+export declare const isProductionEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a production NODE_ENV has not been set.
  *
@@ -72,7 +75,7 @@ export declare const isProductionEnv: (forTesting?: any) => boolean;
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV !== "prod"|"production"|""|undefined; false otherwise
  */
-export declare const isNotProductionEnv: (forTesting?: any) => boolean;
+export declare const isNotProductionEnv: (forTesting?: ForTestingNodeEnv | undefined) => boolean;
 /**
  * Determine if a value is a signed integer. There are no lower or upper bound constraints.
  *
@@ -115,3 +118,4 @@ export declare const isSafeStrictInt: Monadic;
  * @returns {boolean} true if it is not a strict integer within the specified boundaries; false otherwise
  */
 export declare const isNotSafeStrictInt: Monadic;
+export {};

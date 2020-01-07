@@ -10,6 +10,10 @@ import { Monadic } from './types';
 
 const NODE_ENV = process.env.NODE_ENV;
 
+interface ForTestingNodeEnv {
+  nodeEnv: any;
+}
+
 /**
  * Determine if a development NODE_ENV has been set.
  *
@@ -19,8 +23,8 @@ const NODE_ENV = process.env.NODE_ENV;
  * @returns {boolean} true if NODE_ENV === "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
-export const isDevEnv = (forTesting?: any) =>
-  DEV_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+export const isDevEnv = (forTesting?: ForTestingNodeEnv) =>
+  DEV_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting.nodeEnv : (NODE_ENV as string)); // string | undefined is okay
 
 /**
  * Determine if a development NODE_ENV has not been set.
@@ -31,7 +35,7 @@ export const isDevEnv = (forTesting?: any) =>
  * @returns {boolean} true if NODE_ENV !== "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
-export const isNotDevEnv = (forTesting?: any) => !isDevEnv(forTesting);
+export const isNotDevEnv = (forTesting?: ForTestingNodeEnv) => !isDevEnv(forTesting);
 
 /**
  * Determine if a test NODE_ENV has been set.
@@ -41,8 +45,8 @@ export const isNotDevEnv = (forTesting?: any) => !isDevEnv(forTesting);
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "test"|"testing"; false otherwise
  */
-export const isTestEnv = (forTesting?: any) =>
-  TEST_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+export const isTestEnv = (forTesting?: ForTestingNodeEnv) =>
+  TEST_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting.nodeEnv : (NODE_ENV as string)); // string | undefined is okay
 
 /**
  * Determine if a test NODE_ENV has not been set.
@@ -52,7 +56,7 @@ export const isTestEnv = (forTesting?: any) =>
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV !== "test"|"testing"; false otherwise
  */
-export const isNotTestEnv = (forTesting?: any) => !isTestEnv(forTesting);
+export const isNotTestEnv = (forTesting?: ForTestingNodeEnv) => !isTestEnv(forTesting);
 
 /**
  * Determine if a debug NODE_ENV has been set.
@@ -62,8 +66,8 @@ export const isNotTestEnv = (forTesting?: any) => !isTestEnv(forTesting);
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "debug"|"trace"; false otherwise
  */
-export const isDebugEnv = (forTesting?: any) =>
-  DEBUG_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+export const isDebugEnv = (forTesting?: ForTestingNodeEnv) =>
+  DEBUG_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting.nodeEnv : (NODE_ENV as string)); // string | undefined is okay
 
 /**
  * Determine if a debug NODE_ENV has not been set.
@@ -73,7 +77,7 @@ export const isDebugEnv = (forTesting?: any) =>
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV !== "debug"|"trace"; false otherwise
  */
-export const isNotDebugEnv = (forTesting?: any) => !isDebugEnv(forTesting);
+export const isNotDebugEnv = (forTesting?: ForTestingNodeEnv) => !isDebugEnv(forTesting);
 
 /**
  * Determine if a production NODE_ENV has been set.
@@ -83,8 +87,8 @@ export const isNotDebugEnv = (forTesting?: any) => !isDebugEnv(forTesting);
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "prod"|"production"|""|undefined; false otherwise
  */
-export const isProductionEnv = (forTesting?: any) =>
-  PRODUCTION_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+export const isProductionEnv = (forTesting?: ForTestingNodeEnv) =>
+  PRODUCTION_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting.nodeEnv : (NODE_ENV as string)); // string | undefined is okay
 
 /**
  * Determine if a production NODE_ENV has not been set.
@@ -94,7 +98,7 @@ export const isProductionEnv = (forTesting?: any) =>
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV !== "prod"|"production"|""|undefined; false otherwise
  */
-export const isNotProductionEnv = (forTesting?: any) => !isProductionEnv(forTesting);
+export const isNotProductionEnv = (forTesting?: ForTestingNodeEnv) => !isProductionEnv(forTesting);
 
 /**
  * Determine if a value is a signed integer. There are no lower or upper bound constraints.

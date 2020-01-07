@@ -15,7 +15,7 @@ const NODE_ENV = process.env.NODE_ENV;
  * @returns {boolean} true if NODE_ENV === "dev"|"develop"|"development"|"debug"|"trace"|"test"|
  *  "testing"; false otherwise
  */
-exports.isDevEnv = (forTesting) => constants_1.DEV_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
+exports.isDevEnv = (forTesting) => constants_1.DEV_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
 /**
  * Determine if a development NODE_ENV has not been set.
  *
@@ -34,7 +34,7 @@ exports.isNotDevEnv = (forTesting) => !exports.isDevEnv(forTesting);
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "test"|"testing"; false otherwise
  */
-exports.isTestEnv = (forTesting) => constants_1.TEST_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
+exports.isTestEnv = (forTesting) => constants_1.TEST_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
 /**
  * Determine if a test NODE_ENV has not been set.
  *
@@ -52,7 +52,7 @@ exports.isNotTestEnv = (forTesting) => !exports.isTestEnv(forTesting);
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "debug"|"trace"; false otherwise
  */
-exports.isDebugEnv = (forTesting) => constants_1.DEBUG_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
+exports.isDebugEnv = (forTesting) => constants_1.DEBUG_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
 /**
  * Determine if a debug NODE_ENV has not been set.
  *
@@ -70,7 +70,7 @@ exports.isNotDebugEnv = (forTesting) => !exports.isDebugEnv(forTesting);
  * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
  * @returns {boolean} true if NODE_ENV === "prod"|"production"|""|undefined; false otherwise
  */
-exports.isProductionEnv = (forTesting) => constants_1.PRODUCTION_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
+exports.isProductionEnv = (forTesting) => constants_1.PRODUCTION_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting.nodeEnv : NODE_ENV); // string | undefined is okay
 /**
  * Determine if a production NODE_ENV has not been set.
  *
