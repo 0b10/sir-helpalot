@@ -1,11 +1,77 @@
 import { Monadic } from './types';
+/**
+ * Determine if a development NODE_ENV has been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV === "dev"|"develop"|"development"|"debug"|"trace"|"test"|
+ *  "testing"; false otherwise
+ */
 export declare const isDevEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a development NODE_ENV has not been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV !== "dev"|"develop"|"development"|"debug"|"trace"|"test"|
+ *  "testing"; false otherwise
+ */
 export declare const isNotDevEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a test NODE_ENV has been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV === "test"|"testing"; false otherwise
+ */
 export declare const isTestEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a test NODE_ENV has not been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV !== "test"|"testing"; false otherwise
+ */
 export declare const isNotTestEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a debug NODE_ENV has been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV === "debug"|"trace"; false otherwise
+ */
 export declare const isDebugEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a debug NODE_ENV has not been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV !== "debug"|"trace"; false otherwise
+ */
 export declare const isNotDebugEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a production NODE_ENV has been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV === "prod"|"production"|""|undefined; false otherwise
+ */
 export declare const isProductionEnv: (forTesting?: any) => boolean;
+/**
+ * Determine if a production NODE_ENV has not been set.
+ *
+ * The NODE_ENV is cached when the module is loaded - so there are no performance penalties.
+ *
+ * @param {any} forTesting - A fake NODE_ENV that can be passed in to test for.
+ * @returns {boolean} true if NODE_ENV !== "prod"|"production"|""|undefined; false otherwise
+ */
 export declare const isNotProductionEnv: (forTesting?: any) => boolean;
 /**
  * Determine if a value is a signed integer. There are no lower or upper bound constraints.
@@ -13,7 +79,7 @@ export declare const isNotProductionEnv: (forTesting?: any) => boolean;
  * "Strict" contrasts Number.isInteger(1.0) === true, which is bad.
  *
  * @param {any} value = anything
- * @returns {boolean} true if it is an integer, false otherwise
+ * @returns {boolean} true if it is an integer; false otherwise
  */
 export declare const isStrictInt: Monadic;
 /**
@@ -22,7 +88,7 @@ export declare const isStrictInt: Monadic;
  * "Strict" contrasts Number.isInteger(1.0) === true, which is bad.
  *
  * @param {any} value = anything
- * @returns {boolean} true if it is not an integer, false otherwise
+ * @returns {boolean} true if it is not an integer; false otherwise
  */
 export declare const isNotStrictInt: Monadic;
 /**
@@ -34,7 +100,7 @@ export declare const isNotStrictInt: Monadic;
  * "Strict" contrasts Number.isInteger(1.0) === true, which is bad.
  *
  * @param {any} value = anything
- * @returns {boolean} true if it is a strict integer within the specified boundaries, false otherwise
+ * @returns {boolean} true if it is a strict integer within the specified boundaries; false otherwise
  */
 export declare const isSafeStrictInt: Monadic;
 /**
@@ -46,6 +112,6 @@ export declare const isSafeStrictInt: Monadic;
  * "Strict" contrasts Number.isInteger(1.0) === true, which is bad.
  *
  * @param {any} value = anything
- * @returns {boolean} true if it is not a strict integer within the specified boundaries, false otherwise
+ * @returns {boolean} true if it is not a strict integer within the specified boundaries; false otherwise
  */
 export declare const isNotSafeStrictInt: Monadic;
