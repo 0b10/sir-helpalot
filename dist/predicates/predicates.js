@@ -10,6 +10,8 @@ exports.isDevEnv = (forTesting) => constants_1.DEV_NODE_ENVS.has(!lodash_1.defau
 exports.isNotDevEnv = (forTesting) => !exports.isDevEnv(forTesting);
 exports.isTestEnv = (forTesting) => constants_1.TEST_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
 exports.isNotTestEnv = (forTesting) => !exports.isTestEnv(forTesting);
+exports.isDebugEnv = (forTesting) => constants_1.DEBUG_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
+exports.isNotDebugEnv = (forTesting) => !exports.isDebugEnv(forTesting);
 exports.isProductionEnv = (forTesting) => constants_1.PRODUCTION_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
 exports.isNotProductionEnv = (forTesting) => !exports.isProductionEnv(forTesting);
 /**

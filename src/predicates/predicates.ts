@@ -1,5 +1,11 @@
 import _ from 'lodash';
-import { DEV_NODE_ENVS, PRODUCTION_NODE_ENVS, RE_STRICT_INT, TEST_NODE_ENVS } from './constants';
+import {
+  DEBUG_NODE_ENVS,
+  DEV_NODE_ENVS,
+  PRODUCTION_NODE_ENVS,
+  RE_STRICT_INT,
+  TEST_NODE_ENVS,
+} from './constants';
 import { Monadic } from './types';
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -13,6 +19,11 @@ export const isTestEnv = (forTesting?: any) =>
   TEST_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
 
 export const isNotTestEnv = (forTesting?: any) => !isTestEnv(forTesting);
+
+export const isDebugEnv = (forTesting?: any) =>
+  DEBUG_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+
+export const isNotDebugEnv = (forTesting?: any) => !isDebugEnv(forTesting);
 
 export const isProductionEnv = (forTesting?: any) =>
   PRODUCTION_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
