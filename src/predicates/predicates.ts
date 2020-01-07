@@ -1,15 +1,22 @@
-import _ from "lodash";
-
-import { DEV_NODE_ENVS, PRODUCTION_NODE_ENVS, RE_STRICT_INT } from "./constants";
-import { Monadic } from "./types";
+import _ from 'lodash';
+import { DEV_NODE_ENVS, PRODUCTION_NODE_ENVS, RE_STRICT_INT, TEST_NODE_ENVS } from './constants';
+import { Monadic } from './types';
 
 const NODE_ENV = process.env.NODE_ENV;
 
 export const isDevEnv = (forTesting?: any) =>
   DEV_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+
 export const isNotDevEnv = (forTesting?: any) => !isDevEnv(forTesting);
+
+export const isTestEnv = (forTesting?: any) =>
+  TEST_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+
+export const isNotTestEnv = (forTesting?: any) => !isTestEnv(forTesting);
+
 export const isProductionEnv = (forTesting?: any) =>
   PRODUCTION_NODE_ENVS.has(!_.isUndefined(forTesting) ? forTesting : (NODE_ENV as string)); // string | undefined is okay
+
 export const isNotProductionEnv = (forTesting?: any) => !isProductionEnv(forTesting);
 
 /**
@@ -21,7 +28,7 @@ export const isNotProductionEnv = (forTesting?: any) => !isProductionEnv(forTest
  * @returns {boolean} true if it is an integer, false otherwise
  */
 export const isStrictInt: Monadic = (value: any) =>
-  typeof value === "number" && RE_STRICT_INT.test((value as unknown) as string); // any type works
+  typeof value === 'number' && RE_STRICT_INT.test((value as unknown) as string); // any type works
 
 /**
  * Determine if a value is not a signed integer. There are no lower or upper bound constraints.

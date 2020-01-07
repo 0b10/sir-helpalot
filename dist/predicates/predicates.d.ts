@@ -1,6 +1,8 @@
-import { Monadic } from "./types";
+import { Monadic } from './types';
 export declare const isDevEnv: (forTesting?: any) => boolean;
 export declare const isNotDevEnv: (forTesting?: any) => boolean;
+export declare const isTestEnv: (forTesting?: any) => boolean;
+export declare const isNotTestEnv: (forTesting?: any) => boolean;
 export declare const isProductionEnv: (forTesting?: any) => boolean;
 export declare const isNotProductionEnv: (forTesting?: any) => boolean;
 /**

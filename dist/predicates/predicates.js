@@ -8,6 +8,8 @@ const constants_1 = require("./constants");
 const NODE_ENV = process.env.NODE_ENV;
 exports.isDevEnv = (forTesting) => constants_1.DEV_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
 exports.isNotDevEnv = (forTesting) => !exports.isDevEnv(forTesting);
+exports.isTestEnv = (forTesting) => constants_1.TEST_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
+exports.isNotTestEnv = (forTesting) => !exports.isTestEnv(forTesting);
 exports.isProductionEnv = (forTesting) => constants_1.PRODUCTION_NODE_ENVS.has(!lodash_1.default.isUndefined(forTesting) ? forTesting : NODE_ENV); // string | undefined is okay
 exports.isNotProductionEnv = (forTesting) => !exports.isProductionEnv(forTesting);
 /**
@@ -18,7 +20,7 @@ exports.isNotProductionEnv = (forTesting) => !exports.isProductionEnv(forTesting
  * @param {any} value = anything
  * @returns {boolean} true if it is an integer, false otherwise
  */
-exports.isStrictInt = (value) => typeof value === "number" && constants_1.RE_STRICT_INT.test(value); // any type works
+exports.isStrictInt = (value) => typeof value === 'number' && constants_1.RE_STRICT_INT.test(value); // any type works
 /**
  * Determine if a value is not a signed integer. There are no lower or upper bound constraints.
  *
